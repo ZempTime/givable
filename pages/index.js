@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import ListView from '../components/ListView';
+import ListContainer from '../containers/ListContainer';
 
 class App extends Component {
 
   render() {
     return(
       <div>
-      <ListView />
+        <ListContainer />
       </div>
     );
   }
 }
 
-export default App;
+export default ListContainer;

@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Link from 'next/link'
 
 class ListView extends Component {
+  handleClick(event) {
+    event.preventDefault()
+  }
   render() {
     return(
       <div>
@@ -9,7 +12,7 @@ class ListView extends Component {
           <li>First Item</li>
           <li>Second Item</li>
         </ol>
-        <Link href="/items/new"><a>+ Add an Item</a></Link>
+        <a href="#" onClick={this.handleClick}>+ Add an Item</a>
       </div>
     );
   }
