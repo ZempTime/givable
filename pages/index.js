@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ListContainer from '../containers/ListContainer';
+import withRedux from 'next-redux-wrapper';
+import makeStore from '../store/store';
 
 class App extends Component {
-
   render() {
     return(
       <div>
@@ -12,4 +13,4 @@ class App extends Component {
   }
 }
 
-export default ListContainer;
+export default withRedux(makeStore, (state) => ({items: []}))(App);
