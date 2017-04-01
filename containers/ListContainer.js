@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { toggleAddingItem, addItem } from '../actions/itemActions';
 import ListView from '../components/ListView';
-import ItemForm from '../components/ListView';
+import ItemForm from '../components/ItemForm';
 
 const propTypes = {
   addingItem: PropTypes.bool,
@@ -10,27 +11,27 @@ const propTypes = {
 
 class ListContainer extends Component {
   render() {
-    return this.state.addingItem ? (
-      <ListView />
+    const {toggleAddingItem, addingItem, handleSubmit} = this.props;
+
+    return addingItem ? (
+      <ItemForm toggleAddingItem={toggleAddingItem} />
     ) : (
-      <ItemForm />
+      <ListView addingItem={addingItem} toggleAddingItem={toggleAddingItem} />
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-    items: state.items
-  };
-}
+const mapStateToProps = (state) => ({
+  items: state.items,
+  addingItem: state.addingItem
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return{
-
+const mapDispatchToProps = (dispatch) => ({
+  toggleAddingItem() {
+    dispatch(toggleAddingItem);
   }
-  dispatch(addItem(name, link, notes));
-}
+})
 
 ListContainer.proptypes = propTypes;
 
-export default ListContainer;
+export default connect (mapStateToProps, mapDispatchToProps)(ListContainer);

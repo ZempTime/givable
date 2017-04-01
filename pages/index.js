@@ -13,4 +13,4 @@ class App extends Component {
   }
 }
 
-export default withRedux(makeStore, (state) => ({items: []}))(App);
+export default withRedux(makeStore, (state) => ({items: [], addingItem: false}))(App);

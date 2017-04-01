@@ -1,57 +1,40 @@
 import React, {Component} from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 class ItemForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      link: '',
-      notes: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit= this.handleSubmit.bind(this);
-  }
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    const { dispatch } = this.props;
-    const { name, link, notes } = this.state;
-    this.setState({ name: '', link: '', notes: '' });
+  submit = (values) => {
+    console.log(values)
   }
   render() {
     return(
-      <div>
+      <form onSubmit={this.submit}>
         <div>
-          <label htmlFor="name">
-          <p> Name </p>
-          </label>
-          <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+          <label htmlFor="name"> Name </label>
+          <Field name="name" component="input" type="text"/>
           <p>ex: Nutella Spreader</p>
         </div>
         <div>
-          <label htmlFor="link">
-          <p> Link</p>
-          </label>
-          <input type="text" name="link" value={this.state.link} onChange={this.handleChange} />
+          <label htmlFor="link"> Link </label>
+          <Field name="link" component="input" type="text"/>
           <p>ex: https://nutellaspreader.com </p>
         </div>
         <div>
-          <label htmlFor="notes">
-          <p> Link</p>
-          </label>
-          <textarea name="notes" value={this.state.notes} onChange={this.handleChange} />
+          <label htmlFor="notes"> Link </label>
+          <Field name="notes" component="input" type="textarea"/>
           <p>ex: Best fit are the M spreaders, especially like color blue. </p>
         </div>
 
         <div>
-          <input type="submit" value="Add Item" onClick={this.handleSubmit} />
+          <button type="submit">Add Item</button>
         </div>
-        <a href="#" onClick={this.props.toggleAddingItem}>Cancel</a>
-      </div>
+        <a href="#" onClick={() => this.props.toggleAddingItem()}>Cancel</a>
+      </form>
     )
   }
 }
+
+ItemForm = reduxForm({
+  form: 'item'
+})(ItemForm);
 
 export default ItemForm;
